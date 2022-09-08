@@ -4,7 +4,7 @@ author: "Andrew Pederson"
 output:
   html_document: default
   pdf_document: default
-date: "2022-09-02"
+date: "2022-09-08"
 urlcolor: blue
 ---
 
@@ -20,23 +20,23 @@ library(knitr)
 library(dplyr)
 
 # Read in WalletHub dataset with partisan control variables added
-ranks <- read.csv('State_Rankings.csv', stringsAsFactors = TRUE)
+ranks <- read.csv('./data/State_Rankings.csv', stringsAsFactors = TRUE)
 
 # Read in .csv with tax foundation tax burden and census tax/revenue data
-st_ROI_holist <- read.csv('Ranks_Tax_ROI_2020_State_local.csv') 
+st_ROI_holist <- read.csv('./data/Ranks_Tax_ROI_2020_State_local.csv') 
 st_ROI_holist$X2020_Tax_Burden <- parse_number(st_ROI_holist$X2020_Tax_Burden)
 
 st_ROI_holist$ST <- state.abb
 
 # Add National Assessment of Educational Progress test scores from most recent available year downloaded from
 # https://www.nationsreportcard.gov/profiles/stateprofile
-test_scores <- read.csv('NAEP_Math_Reading_Scores_2019.csv')
+test_scores <- read.csv('./data/NAEP_Math_Reading_Scores_2019.csv')
 st_ROI_holist$Eigth_math_scores <- test_scores$NAEP_Math_2019
 st_ROI_holist$Eigth_read_scores <- test_scores$NAEP_Reading_2019
 
 # Add student enrollment data from National Center for Education Statistics downloaded from
 # https://nces.ed.gov/programs/digest/d22/tables/dt22_203.20.asp
-num_students <- read.csv('state_student_enrollment.csv')
+num_students <- read.csv('./data/state_student_enrollment.csv')
 st_ROI_holist$num_stdnts_2020 <- parse_number(num_students$Fall.2020)
 
 # Calculate total state/local expenditures per student
@@ -46,15 +46,15 @@ st_ROI_holist$ed_spend_per_stdt <- st_ROI_holist$Elementary_._secondary/st_ROI_h
 health_percap <- st_ROI_holist$Health_Expenditures/st_ROI_holist$POP_2020
 
 # Read in life expectancy data from CDC https://www.cdc.gov/nchs/pressroom/sosmap/life_expectancy/life_expectancy.htm
-life_expect <- read.csv('st_life_expectancy_2020.csv')
+life_expect <- read.csv('./data/st_life_expectancy_2020.csv')
 st_ROI_holist$life <- life_expect[1:50,3]
 
 # Read infant mortality data from CDC https://www.cdc.gov/nchs/pressroom/sosmap/infant_mortality_rates/infant_mortality.htm
-inf_mort <- read.csv('inf_mort_2020.csv')
+inf_mort <- read.csv('./data/inf_mort_2020.csv')
 st_ROI_holist$inf_mort <- as.numeric(inf_mort[1:50,3])
 
 # Read obesity data from CDC https://www.cdc.gov/obesity/data/prevalence-maps.html
-obesity <- read.csv('obesity_2020.csv')
+obesity <- read.csv('./data/obesity_2020.csv')
 obese <- subset(obesity, State!="District of Columbia" & State!="Guam" & State!="Puerto Rico" )
 st_ROI_holist$obesity <- obese$Prevalence
 
@@ -235,7 +235,7 @@ tax_plot(ed_spend_per_stdt,Education_Score,"State/Local Primary and Secondary Ed
 This raises some questions about WalletHub's education score methodology, since we can generate counter-examples. When we compare [8th grade math and reading scores from 2019](https://www.nationsreportcard.gov/profiles/stateprofile), the most recent year available, we see a significant correlation between per student spending on primary and secondary education and test scores. CA and NY are notable exceptions.
 
 ```{r}
-tax_plot(ed_spend_per_stdt,Eigth_math_scores,"State/Local Primary and Secondary Education Expenditures per Enrolled Student 2020 (thousands)","NAEP 2019 8th Grade Average Math Score")
+tax_plot(ed_spend_per_stdt,Eigth_math_scores,"State/Local Primary and Secondary Education Expenditures\nper Enrolled Student 2020 (thousands)","NAEP 2019 8th Grade Average Math Score")
 ```
 
 ```{r}
@@ -251,7 +251,7 @@ summary(lm(st_ROI_holist$Eigth_math_scores~st_ROI_holist$ed_spend_per_stdt))%>%
 ```
 
 ```{r}
-tax_plot(ed_spend_per_stdt,Eigth_read_scores,"State/Local Primary and Secondary Education Expenditures per Enrolled Student 2020 (thousands)","NAEP 2019 8th Grade Average Reading Score")
+tax_plot(ed_spend_per_stdt,Eigth_read_scores,"State/Local Primary and Secondary Education Expenditures\nper Enrolled Student 2020 (thousands)","NAEP 2019 8th Grade Average Reading Score")
 ```
 
 ```{r}
