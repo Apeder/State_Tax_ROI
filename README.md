@@ -21,6 +21,8 @@ The final report is in this directory as both a .pdf and .html file generated fr
 
 ## Python environment setup for data generation
 
+The following steps are recommended for running `Data_Clean_Munge.py`.
+
 1. Create a new virtual environment (in a local directory called `venv` at the project top-level):
 
         python -m venv venv
