@@ -13,3 +13,24 @@ This project found no significant statistical results to establish partisan cont
 
 The final report is in this directory as both a .pdf and .html file generated from 'State_Performance_Party.Rmd', and the raw data files are the in ./data directory. The 'Data_Clean_Munge.py' script was used to acquire, clean, format and output data files, and the 'state_ranks_analysis.R' script was used to conduct the statistically analyses and create visualizations. 
 
+# Development Setup
+
+**Prerequisites:**
+  - Python 3.x (for generating data)
+  - [R](https://mirror.las.iastate.edu/CRAN/)
+
+## Python environment setup for data generation
+
+1. Create a new virtual environment (in a local directory called `venv` at the project top-level):
+
+        python -m venv venv
+2. Activate the virtual environment:
+
+         source ./venv/bin/activate
+3. Install project dependencies:
+
+         pip install -r requirements.txt
+
+## R setup for report processing and statistical analysis
+
+
