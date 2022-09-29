@@ -1,3 +1,7 @@
+add-venv-additional-instructions
+.idea/
+venv/
+~*
 .Rproj.user
 .Rhistory
 .RData
