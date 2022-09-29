@@ -2,8 +2,8 @@
 title: "State Finance, Partisan Control and Citizen Outcomes: What's the Connection?"
 author: "Andrew Pederson"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 date: "2022-09-08"
 urlcolor: blue
 ---
@@ -80,19 +80,19 @@ In the U.S.' two-party system, increased polarization has renewed attention to '
 
 [^1]: Full Disclosure: I work for [Govern for California](https://governforcalifornia.org/), a Newsom donor
 
-In June of 2021, [CNN's Fareed Zakaria reported](https://www.cnn.com/videos/tv/2021/06/27/exp-gps-0627-fareeds-take.cnn) on a [WalletHub analysis](https://wallethub.com/edu/state-taxpayer-roi-report/3283) that claims to show just that, and we hear often from members of California's civil society asking how we could better track our tax dollars' effectiveness.
+In June of 2021, [CNN's Fareed Zakaria reported](https://www.cnn.com/videos/tv/2021/06/27/exp-gps-0627-fareeds-take.cnn) on a [WalletHub analysis](https://wallethub.com/edu/state-taxpayer-roi-report/3283) that claims to show just that:
 
 ![](Wallet_Hub_Graph.png)
 
 # No Easy Answers
 
-While the WalletHub analysis simplifies some complex datasets into insights effectively, there are some issues. Visually, the graph's y axis is inverted, which gives the misleading impression that more 'Red' states have better services, when the opposite is true. While the axis label clarifies this, it's not natural to look at the lower left quadrant to find the best performers.
+While the WalletHub analysis simplifies some complex data sets into insights effectively, there are some issues. Visually, the graph's y axis is inverted, which gives the misleading impression that more 'Red' states have better services, when the opposite is true. While the axis label clarifies this, it's not natural to look at the lower left quadrant to find the best performers.
 
 The methodology also raises questions. States are coded according to how they voted in the 2020 Presidential election rather than which party controls state government, and states look very different depending on whether we look at the legislature, governorship or both. That the 2020 election was very close and produced some upsets doesn't help; the Republican stronghold of Georgia going to Biden, for example.
 
-It also doesn't make sense to calculate a per capita tax amount by dividing total state income tax revenues by only individuals 18 and over nor to exclude local taxes and federal transfers. There are other taxes (sales and use, licensing, etc.) that will be borne by much wider tranches of society, and just because someone is 18 is not a guarantee that they are employed nor earn enough to pay taxes. For example, the [Institute on Taxation and Economic Policy](https://itep.org/whopays-map/) regularly reviews how 'equitable' state tax policies are. Though many states may raise significant amounts of tax revenue per capita, those who actually pay the taxes can be concentrated among high-earners, often referred to as 'progressive' tax structures. Looking at this data, average earners in Texas may actually [pay more taxes](https://www.houstonchronicle.com/news/houston-texas/texas/article/texans-pay-more-in-taxes-than-california-data-show-17390051.php?) than in California, even though California technically has much higher income tax rates. Tax revenue sources vary from state to state and may or may not reflect that state's primary revenue source nor what a typical resident can expect to pay to the government as a share of income.
+It also doesn't make sense to calculate a per capita tax amount by dividing total state income tax revenues by individuals 18 or older nor to exclude local taxes and federal transfers. There are other taxes (sales and use, licensing, etc.) that will be borne by much wider tranches of society, and just because someone is 18 or older is not a guarantee that they are employed nor earn enough to pay taxes. For example, the [Institute on Taxation and Economic Policy](https://itep.org/whopays-map/) regularly reviews how 'equitable' state tax policies are. Though many states may raise significant amounts of tax revenue per capita, those who actually pay the taxes can be concentrated among high-earners, often referred to as 'progressive' tax structures. Looking at this data, average earners in Texas may actually [pay more taxes](https://www.houstonchronicle.com/news/houston-texas/texas/article/texans-pay-more-in-taxes-than-california-data-show-17390051.php?) than in California, even though California technically has much higher income tax rates. Tax revenue sources vary from state to state and may or may not reflect that state's primary revenue source nor what a typical resident can expect to pay to the government as a share of income.
 
-Instead, we can use the [tax burden](https://taxfoundation.org/tax-burden-by-state-2022/) to estimate the total amount of taxes paid relative to that state's share of the net national product and recreate a version of WalletHub's analysis. Instead of the 2020 presidential vote, states are coded according to which political parties controlled the Executive and Legislative branches in 2020: R for Republican, D for Democratic and S for split control between the two parties.
+Instead, we can use the [tax burden](https://taxfoundation.org/tax-burden-by-state-2022/) to estimate the total amount of taxes paid relative to that state's share of the net national product and recreate a version of WalletHub's analysis. In lieu of the 2020 Presidential vote, states are coded according to which political parties controlled its Executive and Legislative Branches in 2020: R for Republican, D for Democratic and S for split control between the two parties.
 
 ```{r}
 tax_plot(X2020_Tax_Burden,Total_Score,"2020 Tax Burden (%)","WalletHub Total Service Quality Score")
@@ -110,7 +110,7 @@ summary(lm(st_ROI_holist$Total_Score~st_ROI_holist$X2020_Tax_Burden))%>%
     align = c("l", "c", "c", "c", "c"))
 ```
 
-Surprisingly, and more so for reasons we'll see below, a higher tax burden correlates with a better rank in the WalletHub methodology. There is significant variation unrelated to party control, though there are clusters of Republican states with lower tax burdens and Democratic states with higher tax burdens which are statistically significant. It's also worth noting that throughout this analysis, two of the largest Democratic run states, CA and NY, seem to be outliers, in that their increased spending does not often reflect the better outcomes we might expect.
+Surprisingly, more so for reasons we'll see below, a higher tax burden correlates with a better rank in the WalletHub methodology. There is significant variation unrelated to party control, though there are clusters of Republican states with lower tax burdens and Democratic states with higher tax burdens which are statistically significant. It's also worth noting that throughout this analysis, two of the largest Democratic run states, CA and NY, seem to be outliers, in that their increased spending does not often reflect the better outcomes we might expect.
 
 ```{r}
 TukeyHSD(aov(st_ROI_holist$X2020_Tax_Burden~st_ROI_holist$Control))%>%
@@ -124,7 +124,7 @@ TukeyHSD(aov(st_ROI_holist$X2020_Tax_Burden~st_ROI_holist$Control))%>%
     align = c("l", "c", "c", "c", "c","c","c","c"))
 ```
 
-Another note is that a high ROI score doesn't mean that the quality of services is very good, despite being efficient. For example, although Missouri ranks 38th in service quality, it ranks 5th for ROI just by dint of not spending very much. Similarly, FL ranks 30th in service quality and number 2 in ROI. CA is 37th in service quality, and though its raw service quality score of 46.5 is not far from Florida at 51.05 or Texas at 47.93, its ROI rank is 49 because it collects significantly more income tax revenue, albeit from a smaller population of higher earning taxpayers.
+Another note is that a high ROI score doesn't mean that the quality of services is very good, despite being efficient. For example, although Missouri ranks 38th in service quality, it ranks 5th for ROI just by dint of not spending very much. Similarly, FL ranks 30th in service quality and 2nd for ROI. CA is 37th in service quality, and though its raw service quality score of 46.5 is not far from Florida at 51.05 or Texas at 47.93, its ROI rank is 49 because it collects significantly more income tax revenue, albeit from a smaller population of higher earning taxpayers.
 
 Statistically, the only significant result we find from the original WalletHub data is that states that voted Democratic in the 2020 Presidential election generally have better services.
 
@@ -138,13 +138,13 @@ ggplot(ranks,aes(x=Total.Score,group=X2020.Vote,fill=X2020.Vote))+
 t.test(ranks$Total.Score~ranks$X2020.Vote)
 ```
 
-However, as the next section will show, actual control of the Executive and Legislative branches is not correlated with better quality services.
+However, as the next section will show, actual control of the Executive and Legislative Branches is not correlated with better quality services.
 
 # Who's in Office?
 
-Partisan results from a single election is a poor proxy for government control, since some purple states may vote for a Democratic President while the Republican Party still controls the Legislature and/or Governor's office. To examine this, we added three new variables to indicate which party controls each of the Legislative and Executive branches, and whether each state's Executive and Legislative branches were entirely controlled by one party or split between the two.
+Partisan results from a single election is a poor proxy for government control, since some purple states may vote for a Democratic President while the Republican Party still controls the Legislature and/or Governor's office. To examine this, we added three new variables to indicate which party controls each of the Legislative and Executive Branches, and whether each state's Executive and Legislative branches were both controlled by one party or split between the two.
 
-When we look at the Legislature, Governor's office and overall control, results are muddy, with the only statistically significant difference between the three groups being that split legislature states provide better services than Republican legislature states, and with only two split legislatures, this conclusion isn't reliable either.
+When we look at the Legislature, Governorship and overall control, results are muddy, with the only statistically significant difference between the three groups being that split legislature states provide better services than Republican legislature states, and with only two split legislatures, this conclusion isn't reliable either.
 
 ## Legislature
 
@@ -194,7 +194,7 @@ t.test(ranks$Total.Score~ranks$Governor)
 
 ## Overall Control
 
-When we include the Governorship, control comprises 15 Democratic states, 24 Republican and 11 split between the two. However, overall party control isn't significantly correlated with WalletHub's service quality scores either.
+When we include the Governorship, control comprises 15 Democratic states, 24 Republican and 11 split between the two; however, overall party control isn't significantly correlated with WalletHub's service quality scores either.
 
 ```{r, echo=FALSE}
 ggplot(ranks,aes(x=Total.Score,group=Control,fill=Control))+
@@ -210,7 +210,7 @@ anova(lm(ranks$Total.Score~ranks$Control))%>%
          ) %>%
   kable(col.names = c("Predictor", "DF", "SumSq","MeanSq", "Stat", "p"),
     digits = c(0, 2, 2, 2, 3),
-    caption = "Party Overall Control's Effect on Quality Score: Linear Estimate",
+    caption = "Overall Party Control's Effect on Quality Score: Linear Estimate",
     align = c("l", "c", "c", "c", "c"))
 ```
 
@@ -322,14 +322,14 @@ summary(lm(st_ROI_holist$obesity~health_percap))%>%
     align = c("l", "c", "c", "c", "c"))
 ```
 
-To be fair, life expectancy and infant mortality were included in the WalletHub health score, though again, two other WalletHub indexes, one on [Covid safety](https://wallethub.com/edu/safest-states-during-covid/86567) and another on [Health Care Quality](https://wallethub.com/edu/states-with-best-health-care/23457) were given significantly greater weight, along with estimates of costs which may not have been adjusted for income nor purchasing power. As both the WalletHub score indices as well as tax and spending amounts are point in time snapshots, they may not be indicative of longer term trends. For example, it is possible that in outlier states like CA and NY that spend heavily per capita, spending has only increased recently and outcomes reflect historical under funding.
+To be fair, life expectancy and infant mortality were included in the WalletHub health score, though again, two other WalletHub indexes, one on [Covid safety](https://wallethub.com/edu/safest-states-during-covid/86567) and another on [Health Care Quality](https://wallethub.com/edu/states-with-best-health-care/23457) were given significantly greater weight, along with estimates of costs which may not have been adjusted for income nor purchasing power. As both the WalletHub score indices as well as tax and spending amounts are point in time snapshots, they may not be indicative of longer term trends. For example, it is possible that in outlier states like CA and NY that spend heavily per capita, spending has only increased recently and outcomes reflect historical under funding. It is also possible that these correlations result from confounding variables not identified in this analysis.
 
 # Conclusion
 
-While WalletHub's analyses approach complicated questions about state tax policies and how these affect outcomes in key areas in a logical and reasonable way, on closer examination their measurement indices appear opaque and overly abstracted. It could well be that their methodologies are sound, and that the counterexamples presented here simply miss the forest for the trees; however, this is far from certain. The question raised is whether and how citizen outcomes can be connected to state revenues and expenditures, which is vital to voters and policymakers alike.
+While WalletHub's analysis approached complicated questions about state tax policies and how these affect outcomes in key areas in a logical and reasonable way, on closer examination their measurement indices appear opaque and overly abstracted. It could well be that their methodologies are sound, and that the counterexamples presented here simply miss the forest for the trees; however, this is far from certain. The question raised is whether and how citizen outcomes can be connected to state revenues and expenditures, which is vital to voters and policymakers alike.
 
 One thing we can conclude is that, at least in the one year snapshot we observe here, party control does not strongly influence outcomes for citizens. Perhaps this will change as polarization drives ever more radical and diverging choices between 'Red' and 'Blue' states, or perhaps the policy choices making headlines will not cause significant change in the basic functioning of transportation, health, education and other major elements of state and local infrastructure.
 
-More in-depth examinations of specific policies and their outcomes would be useful, and the most important conclusion is that measurement matters. If WalletHub's methodology is not perfect, it is instructive and a well-crafted first attempt from which to iterate. Is it reliable, for example, to base quality indices on other indices and retain accuracy and relatability to outcomes? Is there a generalized, single indicator that we can use to compare policy impact, like [this attempt](https://www.sciencedirect.com/science/article/abs/pii/S0921800917306705) to apply the Genuine Progress Indicator to U.S. States?
+More in-depth examinations of specific policies and their outcomes would be useful, and the most important conclusion is that measurement matters. If WalletHub's methodology is not perfect, it is an instructive and well-crafted first attempt from which to iterate. Is it reliable, for example, to base quality indices on other indices and retain accuracy and relatability to outcomes? Is there a generalized, single indicator that we can use to compare policy impact, like [this attempt](https://www.sciencedirect.com/science/article/abs/pii/S0921800917306705) to apply the Genuine Progress Indicator to U.S. States, the [Human Development Index](https://en.wikipedia.org/wiki/Human_Development_Index), [Measure of America](https://en.wikipedia.org/wiki/Measure_of_America) or OECD's [Better Life Index](https://en.wikipedia.org/wiki/OECD_Better_Life_Index)?
 
 Or is it necessary to look at discrete state operations, their funding and small baskets of specific indicators over time? While this analysis illustrated some weaknesses of arbitrary composite indices, it is difficult to confidently identify specific indicators for outcomes that will be comparable across states given the huge variation in government spending and operational structures. What is more certain is that focusing on partisan rhetoric and power is the least constructive way to frame these discussions.
