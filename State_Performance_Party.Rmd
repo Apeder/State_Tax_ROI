@@ -4,7 +4,7 @@ author: "Andrew Pederson"
 output:
   pdf_document: default
   html_document: default
-date: "2022-09-08"
+date: "2022-29-08"
 urlcolor: blue
 ---
 
@@ -76,9 +76,7 @@ tax_plot <- function(x,y,x_title,y_title) {
 
 # Introduction
 
-In the U.S.' two-party system, increased polarization has renewed attention to 'Red' vs. 'Blue' states, exemplified by the feud between Florida's Republican Governor DeSantis and California's Democratic Governor Newsom[^1]. Each argues that their state represents a clear choice between distinct policies and outcomes, and the Economist recently argued that this trend would increasingly [shape state policies](https://www.economist.com/interactive/briefing/2022/09/03/american-policy-is-splitting-state-by-state-into-two-blocs) in the future. Is this case? If a different political party controls state governments, do we see different policies and associated outcomes? To what extent do these policy differences significantly affect outcomes for citizens?
-
-[^1]: Full Disclosure: I work for [Govern for California](https://governforcalifornia.org/), a Newsom donor
+In the U.S.' two-party system, increased polarization has renewed attention to 'Red' vs. 'Blue' states, exemplified by the feud between Florida's Republican Governor DeSantis and California's Democratic Governor Newsom. Each argues that their state represents a clear choice between distinct policies and outcomes, and the Economist recently argued that this trend would increasingly [shape state policies](https://www.economist.com/interactive/briefing/2022/09/03/american-policy-is-splitting-state-by-state-into-two-blocs) in the future. Is this case? If a different political party controls state governments, do we see different policies and associated outcomes? To what extent do these policy differences significantly affect outcomes for citizens?
 
 In June of 2021, [CNN's Fareed Zakaria reported](https://www.cnn.com/videos/tv/2021/06/27/exp-gps-0627-fareeds-take.cnn) on a [WalletHub analysis](https://wallethub.com/edu/state-taxpayer-roi-report/3283) that claims to show just that:
 
