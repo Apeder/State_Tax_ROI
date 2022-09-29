@@ -25,3 +25,26 @@ The final report is in this directory as a .pdf file generated from 'State_Perfo
 -   CDC life expectancy data from <https://www.cdc.gov/nchs/pressroom/sosmap/life_expectancy/life_expectancy.htm>
 -   CDC infant mortality data from <https://www.cdc.gov/nchs/pressroom/sosmap/infant_mortality_rates/infant_mortality.htm>
 -   CDC obesity data from <https://www.cdc.gov/obesity/data/prevalence-maps.html>
+
+add-venv-additional-instructions
+# Development Setup
+
+**Prerequisites:**
+  - Python 3.x (for generating data)
+  - [R](https://mirror.las.iastate.edu/CRAN/)
+
+## Python environment setup for data generation
+
+The following steps are recommended for running `Data_Clean_Munge.py`.
+
+1. Create a new virtual environment (in a local directory called `venv` at the project top-level):
+
+        python -m venv venv
+2. Activate the virtual environment:
+
+         source ./venv/bin/activate
+3. Install project dependencies:
+
+         pip install -r requirements.txt
+
+## R setup for report processing and statistical analysis
